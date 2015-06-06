@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="x64">
+    <CLASSES>
+      <root url="jar://C:/LeapSDK/lib/LeapJava.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <NATIVE>
+      <root url="file://C:/LeapSDK/lib/x64" />
+    </NATIVE>
+    <SOURCES />
+  </library>
+</component>
