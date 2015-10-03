@@ -1,6 +1,8 @@
 package clases;
  // CAMBIA EL PAQUETE
 
+import javax.swing.*;
+
 public class InterfaceHearMeToo extends javax.swing.JFrame { // Si quieres cambiale el nombre a la clase
     
     public InterfaceHearMeToo() {
@@ -10,8 +12,8 @@ public class InterfaceHearMeToo extends javax.swing.JFrame { // Si quieres cambi
     
     public void letraInterpretada(String Letra, String Posibilidad1, String Posibilidad2){
         jLabel3.setText(Letra);
-        jLabel4.setText(Posibilidad1);
-        jLabel5.setText(Posibilidad2);
+        jButton4.setText(Posibilidad1);
+        jButton5.setText(Posibilidad2);
     }
     
     public void dialogo(String A, String B){
@@ -101,7 +103,7 @@ public class InterfaceHearMeToo extends javax.swing.JFrame { // Si quieres cambi
                            
     }
 
-    @SuppressWarnings("unchecked")
+
     
     private void initComponents() {
 
@@ -109,8 +111,8 @@ public class InterfaceHearMeToo extends javax.swing.JFrame { // Si quieres cambi
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -135,15 +137,25 @@ public class InterfaceHearMeToo extends javax.swing.JFrame { // Si quieres cambi
         jPanel1.add(jLabel3);
         jLabel3.setBounds(210, 340, 70, 100);
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 45));
-        jLabel4.setText("Opción 1");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(197, 410, 70, 100);
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 45));
+        jButton4.setText("Opción 1");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4);
+        jButton4.setBounds(171, 440, 70, 50);
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 45));
-        jLabel5.setText("Opción 2");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(257, 410, 70, 100);
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 45));
+        jButton5.setText("Opción 2");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5);
+        jButton5.setBounds(251, 440, 70, 50);
 
         jButton1.setText("SALIR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -170,14 +182,22 @@ public class InterfaceHearMeToo extends javax.swing.JFrame { // Si quieres cambi
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         System.exit(0);
-    }                                        
+    }
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
+        jLabel3.setText(jButton4.getText());
+    }
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
+        jLabel3.setText(jButton5.getText());
+    }
                    
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JDialog dialogo;
     

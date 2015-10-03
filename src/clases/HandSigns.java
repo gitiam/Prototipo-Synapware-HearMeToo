@@ -56,7 +56,7 @@ public class HandSigns extends Listener{
             Finger finger3 = fingerl.get(3);
             Finger finger4 = fingerl.get(4);
 
-            /*Bone.Type boneType[] = Bone.Type.values();
+            Bone.Type boneType[] = Bone.Type.values();
 
             Bone bone00 = finger0.bone(Bone.Type.TYPE_METACARPAL);
             Bone bone01 = finger0.bone(Bone.Type.TYPE_PROXIMAL);
@@ -83,7 +83,9 @@ public class HandSigns extends Listener{
             Bone bone42 = finger4.bone(Bone.Type.TYPE_INTERMEDIATE);
             Bone bone43 = finger4.bone(Bone.Type.TYPE_DISTAL);
 
-            System.out.println( "Dedo: " + finger0.type() + "      " + bone00.type()
+            Vector direction_hand = hand.direction();
+
+            /*System.out.println( "Dedo: " + finger0.type() + "      " + bone00.type()
                     + " bone, start: " + bone00.prevJoint()
                     + ", end: " + bone00.nextJoint()
                     + ", direction: " + bone00.direction());
@@ -96,7 +98,7 @@ public class HandSigns extends Listener{
 
             // CAPTURA DE LA LETRA M Y N      /////////////////////////////////////////////////////////////////////////////
 
-            Main.window.letraInterpretada("Selecionada", "Opcion 1", "Opcion 2");
+           // Main.window.letraInterpretada("Selecionada", "Opcion 1", "Opcion 2");
 
             if ((finger0.isExtended()==false && finger4.isExtended()==false)) {
 
@@ -105,34 +107,142 @@ public class HandSigns extends Listener{
 
 
                 if (eje_y > 0){
+                    // CAPTURA DE LA LETRA "V" y "P"
+                    if (finger1.isExtended() == true && finger2.isExtended() == true) {
+                        if (finger3.isExtended() == true)
+                        {
+                            double distancia = 0.1;
+                            if (Math.abs(finger1.bone(Bone.Type.TYPE_DISTAL).direction().getX() - finger2.bone(Bone.Type.TYPE_DISTAL).direction().getX()) > distancia) {
+                                Main.window.letraInterpretada("w", "P", "M");
+                            } else {
+                                Main.window.letraInterpretada("P", "w", "M");
+                            }
+                        }
+                        else if (finger3.isExtended() == false){
+                            double distancia = 0.1;
+                            if (finger1.bone(Bone.Type.TYPE_DISTAL).direction().getX() - finger2.bone(Bone.Type.TYPE_DISTAL).direction().getX() > distancia) {
+                                Main.window.letraInterpretada("V", "U", "");
+
+                            }
+                            else if (finger1.bone(Bone.Type.TYPE_DISTAL).direction().getX() - finger2.bone(Bone.Type.TYPE_DISTAL).direction().getX() < -0.2) {
+                                Main.window.letraInterpretada("R", "U", "");
+                            }else {
+                                Main.window.letraInterpretada("U", "V", "");
+                            }
+                        }
+                    }
+                }
+                else if (eje_y < 0) {
+
                     if (finger2.isExtended() == true && finger1.isExtended() == true && finger3.isExtended() == true) {
 
-                        System.out.println("Posibles letras: 'P' -- 'M'\nSeleccion actual: 'P'." );
+                        System.out.println("Posibles letras: 'M' -- 'N'\nSeleccion actual: 'M'.");
 
-                        Main.window.letraInterpretada("P", "P", "M" );
+                        Main.window.letraInterpretada("M", "M", "N");
 
-                    }
+                    } else if (finger2.isExtended() == true && finger1.isExtended() == true && finger3.isExtended() == false) {
 
-                }
-                else if (eje_y < 0){
+                        System.out.println("Posibles letras: 'M' -- 'N'\nSeleccion actual: 'N'.");
 
-                    if (finger2.isExtended() == true && finger1.isExtended() == true && finger3.isExtended() == true) {
-
-                        System.out.println("Posibles letras: 'M' -- 'N'\nSeleccion actual: 'M'." );
-
-                        Main.window.letraInterpretada("M", "M", "N" );
+                        Main.window.letraInterpretada("N", "M", "N");
 
                     }
-                }
+                    else if( bone13.direction().getY() >=-0.3 && bone13.direction().getY()<0.2  ){
+                        //   CAPTURA DE LA H  ///////////////////////////////////////////////////////////////////////////////////
 
-                if (finger2.isExtended() == true && finger1.isExtended() == true && finger3.isExtended() == false) {
-
-                    System.out.println("Posibles letras: 'M' -- 'N'\nSeleccion actual: 'N'." );
-
-                    Main.window.letraInterpretada("N", "M", "N");
-
+                        Main.window.letraInterpretada("H", "H", "G");
+                    }
                 }
             }
+            //CAPTURA DE LA LETRA "Y"
+            else if (finger0.isExtended()==true && finger1.isExtended()==false && finger2.isExtended()==false && finger3.isExtended()==false && finger4.isExtended()==true )
+            {
+                System.out.println("Seleccion actual: 'Y'." );
+
+                Main.window.letraInterpretada("Y","","");
+            }
+
+            else if (( finger1.isExtended()==false && finger2.isExtended()==false && finger3.isExtended()==false && finger4.isExtended()==false)){
+
+                //  CAPTURAR LETRA A  //////////////////////////////////////////////////////
+
+                if ( bone12.direction().getY()>= 0.9 && bone22.direction().getY()>= 0.85 && bone32.direction().getY()>= 0.7 ){//&& bone42.direction().getY()>= 0.5  ){//&& bone11.direction().getY()>= -0.3 && bone21.direction().getY()>= -0.3 && bone31.direction().getY()>= -0.3 && bone41.direction().getY()>= -0.3){
+
+                    //bone02.direction().getY()<-0.75 &&
+
+                    Main.window.letraInterpretada("A", "S", "T" );
+
+                }
+
+                //   CAPTURA DE LA E //////////////////////////////////////////////////////////////////////////////////////
+                else if (bone11.direction().getY() <=-0.88 && bone21.direction().getY() <=-0.88 && bone31.direction().getY() <=-0.88 && bone41.direction().getY() <=-0.88 && bone03.direction().getX() <=-0.4){
+
+                    Main.window.letraInterpretada("E", "C", "A" );
+
+                }
+
+
+                //  CAPTURAR LETRA C  //////////////////////////////////////////////////////
+
+                else //if (bone03.direction().getY()>0 && bone13.direction().getY()<=0 && bone23.direction().getY()<=0 && bone33.direction().getY()<=0 && bone43.direction().getY()<=0 ){
+
+
+
+                    Main.window.letraInterpretada("C", "C", "O" );
+
+            }
+
+
+            //   CAPTURA DE LA B //////////////////////////////////////////////////////////////////////////////////////
+
+            else if ((finger0.isExtended()==false && finger1.isExtended()==true && finger2.isExtended()==true && finger3.isExtended()==true && finger4.isExtended()==true)){
+
+
+
+                Main.window.letraInterpretada("B", "A", "B" );
+
+            }
+
+            //   CAPTURA DE LA D //////////////////////////////////////////////////////////////////////////////////////
+
+            else if (( finger1.isExtended()==true && finger2.isExtended()==false && finger3.isExtended()==false && finger4.isExtended()==false)){
+
+                Float eje_y = direction_hand.getY();
+
+
+                if (eje_y > 0.2 && bone22.direction().getY()>= 0.85 && bone32.direction().getY()>= 0.7 ){//&& bone42.direction().getY()>= 0.5  ){//&& bone11.direction().getY()>= -0.3 && bone21.direction().getY()>= -0.3 && bone31.direction().getY()>= -0.3 && bone41.direction().getY()>= -0.3){
+
+                    //bone02.direction().getY()<-0.75 &&
+
+                    Main.window.letraInterpretada("D", "D", "C" );
+                }
+
+                else if (eje_y <= 0.2){
+
+                    Main.window.letraInterpretada("G", "G", "H" );
+
+                }
+
+            }
+
+
+            //   CAPTURA DE LA F //////////////////////////////////////////////////////////////////////////////////////
+
+            else if ((finger0.isExtended()==false && finger1.isExtended()==false && finger2.isExtended()==true && finger3.isExtended()==true && finger4.isExtended()==true)){
+
+
+                if ( bone12.direction().getY()>= 0.85 && bone03.direction().getY()<= -0.6 ){
+
+                    Main.window.letraInterpretada("F", "A", "F" );
+
+                }
+
+
+
+            }
+
+
+
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
     }

@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: C:\Users\Josexo\IdeaProjects\hello world\out\production\he
+ llo world\clases
+Main-Class: Main.class
+
